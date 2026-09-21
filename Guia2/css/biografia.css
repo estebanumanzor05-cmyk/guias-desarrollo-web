@@ -1,0 +1,209 @@
+/* ===== Variables ===== */
+:root {
+    --color-fondo: #10131a;
+    --color-superficie: #171b24;
+    --color-dorado: #d1a954;
+    --color-texto: #eceef2;
+    --color-texto-tenue: #9aa1ad;
+    --color-borde: rgba(255, 255, 255, 0.08);
+    --fuente-titulos: "Space Grotesk", Arial, sans-serif;
+    --fuente-texto: "Inter", Arial, sans-serif;
+}
+
+/* Selector universal */
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 18px;
+}
+
+body {
+    margin: 0;
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+    font-family: var(--fuente-texto);
+}
+
+/* ---- Portada ---- */
+.portada {
+    text-align: center;
+    padding: 60px 20px 40px;
+    background: radial-gradient(circle at top, #1c2230, var(--color-fondo));
+}
+
+#foto-perfil {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--color-dorado);
+}
+
+.portada h1 {
+    font-family: var(--fuente-titulos);
+    font-size: 2.4rem;
+    margin: 18px 0 6px;
+}
+
+.rol {
+    color: var(--color-texto-tenue);
+    margin: 0 0 16px;
+}
+
+/* Selector de hijos: solo los span que son hijos directos de .badges */
+.badges > span {
+    display: inline-block;
+    font-size: 0.75rem;
+    color: var(--color-dorado);
+    border: 1px solid var(--color-dorado);
+    border-radius: 20px;
+    padding: 4px 12px;
+}
+
+/* Selector adyacente: separación entre insignias consecutivas */
+.badge + .badge {
+    margin-left: 10px;
+}
+
+/* ---- Navegación ---- */
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    background-color: var(--color-superficie);
+    border-top: 1px solid var(--color-borde);
+    border-bottom: 1px solid var(--color-borde);
+    padding: 14px 0;
+}
+
+/* Selector de hijos: enlaces directos del nav */
+nav > a {
+    color: var(--color-texto-tenue);
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+}
+
+nav > a:hover {
+    color: var(--color-dorado);
+}
+
+/* ---- Contenido principal ---- */
+main {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.bloque {
+    padding-top: 50px;
+}
+
+.bloque h2 {
+    font-family: var(--fuente-titulos);
+    color: var(--color-dorado);
+    border-bottom: 1px solid var(--color-borde);
+    padding-bottom: 10px;
+}
+
+/* Selector descendiente: cualquier párrafo dentro de main */
+main p {
+    line-height: 1.7;
+    color: var(--color-texto-tenue);
+}
+
+/* Pseudo-elemento first-letter combinado con clase */
+.parrafo-intro:first-letter {
+    color: var(--color-dorado);
+    font-family: var(--fuente-titulos);
+    font-size: 1.8rem;
+}
+
+/* ---- Tabla de estudios ---- */
+.tabla-cursos {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.tabla-cursos th, .tabla-cursos td {
+    border: 1px solid var(--color-borde);
+    padding: 10px 12px;
+    text-align: left;
+    font-size: 0.9rem;
+}
+
+.tabla-cursos th {
+    background-color: var(--color-superficie);
+    color: var(--color-dorado);
+}
+
+/* Pseudo-clase nth-child: filas alternadas */
+.tabla-cursos tbody tr:nth-child(odd) {
+    background-color: rgba(255,255,255,0.02);
+}
+
+/* ---- Lista de intereses ---- */
+.lista-intereses {
+    list-style: none;
+    padding: 0;
+}
+
+.lista-intereses li {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--color-borde);
+}
+
+/* Pseudo-clase first-child: primer elemento de la lista sin borde superior extra */
+.lista-intereses li:first-child {
+    padding-top: 0;
+}
+
+.etiqueta-interes {
+    display: inline-block;
+    min-width: 110px;
+    color: var(--color-dorado);
+    font-weight: bold;
+}
+
+/* ---- Contacto ---- */
+.lista-contacto {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+}
+
+/* Selector de atributos: enlaces externos con target=_blank */
+.lista-contacto a[target="_blank"]::after {
+    content: " ↗";
+}
+
+/* Pseudo-clases de enlace */
+.lista-contacto a:link,
+.lista-contacto a:visited {
+    color: var(--color-dorado);
+    text-decoration: none;
+}
+
+.lista-contacto a:hover {
+    text-decoration: underline;
+}
+
+/* Selector de atributos: enlaces de correo */
+a[href^="mailto:"] {
+    font-weight: bold;
+}
+
+/* ---- Pie ---- */
+footer {
+    margin-top: 60px;
+    padding: 24px;
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--color-texto-tenue);
+    border-top: 1px solid var(--color-borde);
+}
