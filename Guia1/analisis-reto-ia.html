@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reto IA — Diagnóstico, prompts y análisis de correspondencia</title>
+<style>
+    body { font-family: Arial, sans-serif; max-width: 900px; margin: 40px auto; padding: 0 20px; line-height: 1.6; color: #1c1c1c; }
+    h1 { font-size: 1.8rem; }
+    h2 { margin-top: 40px; border-bottom: 2px solid #0f3d63; padding-bottom: 6px; color: #0f3d63; }
+    .prompt { background: #f4f4f4; border-left: 4px solid #0f3d63; padding: 14px 18px; font-style: italic; margin: 14px 0; }
+    .placeholder-captura { background: #fafafa; border: 2px dashed #bbb; border-radius: 6px; padding: 40px 20px; text-align: center; color: #888; margin: 14px 0; }
+    table { width: 100%; border-collapse: collapse; margin-top: 14px; }
+    th, td { border: 1px solid #ddd; padding: 10px; text-align: left; vertical-align: top; }
+    th { background: #0f3d63; color: white; }
+    ol li { margin-bottom: 10px; }
+    a { color: #0f3d63; }
+</style>
+</head>
+<body>
+
+<h1>Reto IA — Diagnóstico, instrucciones y análisis de correspondencia</h1>
+<p><strong>Sitio salvadoreño seleccionado:</strong> <a href="https://www.elsalvador.com" target="_blank">https://www.elsalvador.com</a> (El Diario de Hoy)</p>
+<p><strong>Herramienta de IA utilizada en este ejercicio (Guía 2):</strong> Claude (Anthropic) — distinta a la herramienta empleada en el Reto IA de la Guía práctica 1.</p>
+
+<h2>1. Diagnóstico de la página de inicio</h2>
+<div class="placeholder-captura">
+    [ Inserta aquí tu captura de pantalla de la página de inicio de elsalvador.com ]<br>
+    (Cmd+Shift+4 en Mac, o la herramienta de Recorte en Windows, y arrastra la imagen a esta carpeta)
+</div>
+<p>Observaciones registradas al navegar el sitio en vivo el 21 de septiembre de 2026:</p>
+<ol>
+    <li><strong>El banner publicitario domina el primer plano.</strong> Un anuncio a todo el ancho, más una barra decorativa con la bandera de El Salvador, ocupan gran parte del área visible antes de hacer scroll, empujando la primera noticia real hacia abajo.</li>
+    <li><strong>Jerarquía visual débil entre noticias.</strong> Las tres tarjetas de la fila superior (la nota destacada de "Libertad" y dos notas secundarias) se muestran prácticamente del mismo tamaño y peso, sin que quede claro cuál es la noticia principal del día.</li>
+    <li><strong>Tarjetas de noticia inconsistentes.</strong> El tamaño de imagen, la posición de la etiqueta de categoría y la longitud del titular varían de una tarjeta a otra, rompiendo el ritmo visual de una cuadrícula.</li>
+</ol>
+
+<h2>2. Recopilación de contexto</h2>
+<p>Antes de redactar la instrucción elaborada se reunió el siguiente material:</p>
+<ul>
+    <li>Capturas de pantalla de la página de inicio actual (arriba).</li>
+    <li>Identidad visual observada: azul institucional, rojo de acento, tipografía de titulares tipo serif para las notas y sans-serif para el resto del sitio.</li>
+    <li>Estructura de navegación existente: Inicio, Noticias, Turismo, Dinero y negocios, Vida, Entretenimiento, Deportes.</li>
+    <li>Los tres aspectos de mejora identificados en el diagnóstico.</li>
+</ul>
+
+<h2>3. Las dos instrucciones (prompts)</h2>
+
+<h3>a) Instrucción genérica</h3>
+<div class="prompt">"Mejora esta página de inicio."</div>
+<p><strong>Resultado:</strong> <a href="../reto-ia/generico/index.html" target="_blank">reto-ia/generico/index.html</a></p>
+<p>Con una instrucción sin contexto, el resultado se limitó a un rediseño superficial: una cuadrícula genérica de tres tarjetas con estilos "de plantilla" (colores planos, tipografía por defecto), sin abordar ninguno de los problemas estructurales identificados — no hay jerarquía entre nota principal y secundarias, no se resuelve el problema del anuncio, y la marca del sitio se pierde por completo.</p>
+
+<h3>b) Instrucción elaborada</h3>
+<div class="prompt">
+"Rediseña la página de inicio de un portal de noticias salvadoreño (basado conceptualmente en elsalvador.com) resolviendo estos tres problemas concretos: (1) el banner publicitario y la barra decorativa dominan el área visible antes del scroll y deben reducirse a un único bloque de anuncio bien delimitado, fuera del área de lectura; (2) debe existir una jerarquía visual clara, con una nota principal grande y notas secundarias claramente más pequeñas; (3) las tarjetas de noticia deben seguir un patrón consistente de tamaño de imagen, etiqueta de categoría y estructura de texto. Usa una identidad visual con azul institucional (#0f3d63) y rojo de acento (#d1272f), tipografía serif para titulares (Merriweather) y sans-serif para el resto (Inter), manteniendo el menú de categorías existente: Inicio, Noticias, Turismo, Dinero y negocios, Vida, Entretenimiento, Deportes. Entrega HTML y CSS completos y responsivos."
+</div>
+<p><strong>Resultado:</strong> <a href="../reto-ia/elaborado/index.html" target="_blank">reto-ia/elaborado/index.html</a></p>
+<p>Con contexto detallado, el resultado sí resuelve los tres problemas: separa el anuncio en una franja discreta fuera del flujo editorial, establece una nota principal grande junto a una columna secundaria de menor peso, y unifica el patrón de las tarjetas de noticia (imagen, categoría, titular) en toda la página. También conserva la identidad de marca (colores, tipografías, menú) especificada en el contexto.</p>
+
+<h2>4. Análisis de correspondencia</h2>
+<p>Elementos significativos del código del resultado elaborado, clasificados entre contenido ya estudiado en el curso y contenido nuevo:</p>
+<table>
+    <thead>
+        <tr><th>Contenido ya estudiado en el curso</th><th>Contenido nuevo — función que cumple</th></tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Selectores de clase (<code>.tarjeta</code>, <code>.categoria</code>), selectores descendientes y hoja de estilo externa vinculada con &lt;link&gt;</td>
+            <td><strong>Variables CSS (<code>:root</code> con <code>--azul</code>, <code>--rojo</code>, etc.):</strong> centralizan la paleta de color para que un solo cambio se propague a todo el sitio, algo que con selectores sueltos habría requerido editar cada regla.</td>
+        </tr>
+        <tr>
+            <td>Etiquetas semánticas (header, nav, main, section, article, footer) y estructura de documento con &lt;head&gt;/&lt;body&gt;</td>
+            <td><strong>CSS Grid (<code>display: grid; grid-template-columns</code>):</strong> reparte la nota principal y la columna secundaria en proporción 2:1 sin necesidad de floats ni tablas de maquetación.</td>
+        </tr>
+        <tr>
+            <td>Propiedades de texto y color (font-family, color, text-transform, letter-spacing)</td>
+            <td><strong><code>object-fit: cover</code> en las imágenes:</strong> recorta las imágenes para llenar un contenedor de tamaño fijo sin deformarlas, resolviendo el problema de tarjetas con imágenes de proporciones distintas.</td>
+        </tr>
+        <tr>
+            <td>Combinación de selectores y pseudo-clases como :hover</td>
+            <td><strong>Media query (<code>@media (max-width: 700px)</code>):</strong> cambia la cuadrícula de dos columnas a una sola columna en pantallas angostas; el curso no ha cubierto diseño responsivo todavía.</td>
+        </tr>
+        <tr>
+            <td>Uso de Google Fonts mediante &lt;link&gt; en el head</td>
+            <td><strong>Flexbox (<code>display: flex</code>) en la columna secundaria y en la barra de navegación:</strong> alinea imagen y texto de cada tarjeta secundaria en fila, y distribuye los enlaces del menú con espacio uniforme.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>5. Publicación y video</h2>
+<p>Ambos resultados se publican como sitios independientes mediante GitHub Pages, enlazados desde la página de inicio del repositorio de guías (<a href="../index.html">index.html</a>). El video explicativo (máximo 10 minutos, mostrando en pantalla compartida el sitio original y el resultado final, y explicando verbalmente qué información se le dio a la herramienta de IA, qué elementos del código ya se conocían y cuáles debieron investigarse) queda pendiente de grabación por el estudiante.</p>
+
+</body>
+</html>

@@ -1,0 +1,149 @@
+:root {
+    --color-fondo: #0d0d0d;
+    --color-superficie: #171717;
+    --color-verde: #7cb342;
+    --color-texto: #eaeaea;
+    --color-texto-tenue: #a8a8a8;
+    --fuente-titulos: Georgia, "Times New Roman", serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#portada {
+    background: linear-gradient(180deg, rgba(0,0,0,0.2), rgba(0,0,0,0.85)), var(--color-verde);
+    padding: 70px 20px 40px;
+    text-align: center;
+}
+
+#portada .etiqueta {
+    display: inline-block;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border: 1px solid var(--color-texto);
+    border-radius: 20px;
+    padding: 4px 14px;
+    margin-bottom: 16px;
+}
+
+#portada h1 {
+    font-family: var(--fuente-titulos);
+    font-size: 3rem;
+    margin: 0;
+    letter-spacing: 2px;
+}
+
+#portada .lema {
+    font-style: italic;
+    color: var(--color-texto-tenue);
+}
+
+#menu {
+    display: flex;
+    justify-content: center;
+    background-color: var(--color-superficie);
+    border-bottom: 2px solid var(--color-verde);
+}
+
+#menu a {
+    color: var(--color-texto-tenue);
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    padding: 16px 20px;
+}
+
+#menu a:hover {
+    color: var(--color-verde);
+}
+
+main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.bloque {
+    padding-top: 48px;
+}
+
+.bloque h2 {
+    font-family: var(--fuente-titulos);
+    color: var(--color-verde);
+    border-bottom: 1px solid #333;
+    padding-bottom: 10px;
+}
+
+.fila {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+}
+
+.imagen-serie {
+    width: 40%;
+    border-radius: 8px;
+}
+
+.texto {
+    flex: 1;
+}
+
+.parrafo-intro {
+    font-weight: bold;
+}
+
+.lista-personajes {
+    list-style: none;
+    padding: 0;
+}
+
+.lista-personajes li {
+    padding: 10px 0;
+    border-bottom: 1px solid #262626;
+}
+
+.nombre {
+    color: var(--color-verde);
+    font-weight: bold;
+}
+
+.tabla-temporadas {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.tabla-temporadas th, .tabla-temporadas td {
+    border: 1px solid #333;
+    padding: 8px 12px;
+    text-align: center;
+}
+
+.tabla-temporadas th {
+    background-color: var(--color-verde);
+    color: #0d0d0d;
+}
+
+.cita a {
+    color: var(--color-verde);
+}
+
+#pie {
+    margin-top: 60px;
+    padding: 24px;
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--color-texto-tenue);
+    border-top: 1px solid #262626;
+}

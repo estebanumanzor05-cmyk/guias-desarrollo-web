@@ -1,0 +1,218 @@
+:root {
+    --azul: #0f3d63;
+    --rojo: #d1272f;
+    --texto: #1c1c1c;
+    --texto-tenue: #666;
+    --fondo: #ffffff;
+    --borde: #e6e6e6;
+    --fuente-titulos: 'Merriweather', Georgia, serif;
+    --fuente-texto: 'Inter', Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: var(--fuente-texto);
+    color: var(--texto);
+    background: var(--fondo);
+}
+
+.franja-aviso {
+    background: #fff3cd;
+    color: #665200;
+    text-align: center;
+    font-size: 0.72rem;
+    padding: 4px;
+}
+
+.masthead {
+    border-bottom: 3px solid var(--azul);
+}
+
+.top-bar {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    background: #f4f4f4;
+    font-size: 0.75rem;
+    color: var(--texto-tenue);
+    padding: 6px 24px;
+}
+
+.top-bar a { color: var(--texto-tenue); text-decoration: none; }
+
+.logo-row {
+    text-align: center;
+    padding: 14px 0 6px;
+}
+
+.logo {
+    font-family: var(--fuente-titulos);
+    font-weight: 900;
+    font-size: 2rem;
+    color: var(--azul);
+}
+
+.logo span { color: var(--rojo); }
+
+.nav-principal {
+    display: flex;
+    justify-content: center;
+    gap: 26px;
+    padding: 10px 0;
+    background: var(--azul);
+}
+
+.nav-principal a {
+    color: #cfe0f0;
+    text-decoration: none;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding-bottom: 4px;
+    border-bottom: 2px solid transparent;
+}
+
+.nav-principal a.activo,
+.nav-principal a:hover {
+    color: white;
+    border-bottom-color: var(--rojo);
+}
+
+main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 30px 20px;
+}
+
+/* Sección portada: nota principal + columna secundaria, jerarquía clara */
+.portada {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 28px;
+}
+
+.nota-principal img {
+    width: 100%;
+    border-radius: 4px;
+    display: block;
+}
+
+.categoria {
+    display: inline-block;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: white;
+    padding: 3px 10px;
+    border-radius: 3px;
+    margin-top: 14px;
+}
+
+.categoria-nacional { background: var(--rojo); }
+.categoria-dinero { background: #1a7a4c; }
+.categoria-vida { background: #a9439a; }
+.categoria-entretenimiento { background: #c77b00; }
+.categoria-deportes { background: var(--azul); }
+
+.nota-principal h1 {
+    font-family: var(--fuente-titulos);
+    font-size: 1.9rem;
+    line-height: 1.25;
+    margin: 10px 0;
+}
+
+.nota-principal p {
+    color: var(--texto-tenue);
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.columna-secundaria {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.tarjeta-secundaria {
+    display: flex;
+    gap: 12px;
+    border-bottom: 1px solid var(--borde);
+    padding-bottom: 16px;
+}
+
+.tarjeta-secundaria img {
+    width: 110px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+
+.tarjeta-secundaria h3 {
+    font-family: var(--fuente-titulos);
+    font-size: 1rem;
+    margin: 6px 0 0;
+    line-height: 1.3;
+}
+
+/* Un solo bloque de anuncio, aislado del contenido editorial */
+.franja-anuncio {
+    margin: 34px 0;
+    padding: 14px;
+    text-align: center;
+    background: #f0f0f0;
+    color: #999;
+    font-size: 0.8rem;
+    border: 1px dashed #ccc;
+    border-radius: 4px;
+}
+
+.grid-final h2 {
+    font-family: var(--fuente-titulos);
+    border-bottom: 2px solid var(--azul);
+    padding-bottom: 8px;
+}
+
+.grid-noticias {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.tarjeta {
+    border: 1px solid var(--borde);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.tarjeta img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+}
+
+.tarjeta .categoria {
+    margin: 12px 0 0 12px;
+}
+
+.tarjeta h3 {
+    font-family: var(--fuente-titulos);
+    font-size: 1rem;
+    margin: 8px 12px 16px;
+}
+
+footer {
+    text-align: center;
+    padding: 24px;
+    font-size: 0.75rem;
+    color: var(--texto-tenue);
+    border-top: 1px solid var(--borde);
+}
+
+@media (max-width: 700px) {
+    .portada { grid-template-columns: 1fr; }
+    .grid-noticias { grid-template-columns: 1fr; }
+}

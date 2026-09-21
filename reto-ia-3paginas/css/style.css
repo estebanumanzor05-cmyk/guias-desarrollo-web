@@ -1,0 +1,300 @@
+/* ===========================================================
+   Estilo aplicado: Hashnode — "Editorial newsroom on a gray runway"
+   Tomado de https://styles.refero.design/ (design.md conservado
+   en instruccion-ia.html de esta misma carpeta).
+   =========================================================== */
+
+:root {
+    /* Paleta Hashnode */
+    --blueprint-blue: #1d52de;
+    --mint: #00bc7d;
+    --ink: #16191c;
+    --carbon: #1c2024;
+    --slate: #7b8187;
+    --fog: #d1d4d9;
+    --stone: #e6e8eb;
+    --paper: #f4f5f7;
+    --canvas: #f9fafb;
+
+    --fuente: "Inter", "Suisse Intl", -apple-system, sans-serif;
+
+    --radio-tag: 10px;
+    --radio-input: 10px;
+    --radio-boton: 10px;
+    --radio-card: 14px;
+    --radio-hero: 18px;
+
+    --gap-seccion: 48px;
+    --padding-card: 16px;
+    --gap-elemento: 8px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    background: var(--canvas);
+    color: var(--ink);
+    font-family: var(--fuente);
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+a { color: var(--blueprint-blue); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.contenedor {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ---- Encabezado ---- */
+header.sitio {
+    background: var(--canvas);
+    border-bottom: 1px solid var(--fog);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.barra-superior {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.marca {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+}
+
+.marca span { color: var(--blueprint-blue); }
+
+nav.principal {
+    display: flex;
+    gap: var(--gap-seccion);
+}
+
+nav.principal a {
+    color: var(--carbon);
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: color 0.2s ease;
+}
+
+nav.principal a:hover,
+nav.principal a.activo {
+    color: var(--blueprint-blue);
+    text-decoration: none;
+}
+
+.cta-boton {
+    background: var(--blueprint-blue);
+    color: white;
+    border: none;
+    border-radius: var(--radio-boton);
+    padding: 10px 18px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.cta-boton:hover {
+    transform: translateY(-1px);
+}
+
+/* ---- Hero / nota principal ---- */
+.hero {
+    background: var(--paper);
+    border-radius: var(--radio-hero);
+    border: 1px solid var(--fog);
+    margin: var(--gap-seccion) auto 0;
+    max-width: 1200px;
+    padding: 32px;
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 32px;
+    align-items: center;
+    opacity: 0;
+    animation: aparecer 0.6s ease forwards;
+}
+
+@keyframes aparecer {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.hero img {
+    width: 100%;
+    border-radius: var(--radio-card);
+    display: block;
+}
+
+.etiqueta-tag {
+    display: inline-block;
+    background: var(--stone);
+    color: var(--carbon);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-radius: var(--radio-tag);
+    padding: 3px 10px;
+    margin-bottom: 12px;
+}
+
+.hero h1 {
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.38;
+    margin: 0 0 12px;
+}
+
+.hero p {
+    color: var(--slate);
+    font-size: 16px;
+}
+
+/* ---- Cuadrícula de tarjetas (feed a dos columnas) ---- */
+.seccion {
+    max-width: 1200px;
+    margin: var(--gap-seccion) auto 0;
+    padding: 0 20px;
+}
+
+.seccion h2 {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    margin-bottom: 20px;
+}
+
+.grid-tarjetas {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.tarjeta {
+    background: var(--canvas);
+    border: 1px solid var(--fog);
+    border-radius: var(--radio-card);
+    padding: var(--padding-card);
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.tarjeta:hover {
+    border-color: var(--blueprint-blue);
+    transform: translateY(-3px);
+}
+
+.tarjeta img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 12px;
+    display: block;
+}
+
+.tarjeta h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0 0 6px;
+    letter-spacing: -0.025em;
+}
+
+.tarjeta .meta {
+    color: var(--slate);
+    font-size: 14px;
+}
+
+/* ---- Formularios (página Contacto) ---- */
+form.contacto {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-elemento);
+    max-width: 520px;
+}
+
+form.contacto label {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--carbon);
+    margin-top: 8px;
+}
+
+form.contacto input,
+form.contacto textarea {
+    border: 1px solid var(--fog);
+    border-radius: var(--radio-input);
+    padding: 10px 12px;
+    font-family: var(--fuente);
+    font-size: 16px;
+    background: var(--canvas);
+    color: var(--ink);
+    transition: border-color 0.15s ease;
+}
+
+form.contacto input:focus,
+form.contacto textarea:focus {
+    outline: none;
+    border-color: var(--blueprint-blue);
+}
+
+/* ---- Tarjetas de servicios/planes ---- */
+.grid-planes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.plan {
+    background: var(--canvas);
+    border: 1px solid var(--fog);
+    border-radius: var(--radio-card);
+    padding: 24px;
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.plan:hover {
+    transform: translateY(-4px);
+}
+
+.plan .precio {
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--blueprint-blue);
+    margin: 12px 0;
+}
+
+.plan.destacado {
+    border-color: var(--blueprint-blue);
+    border-width: 2px;
+}
+
+/* ---- Pie ---- */
+footer.sitio {
+    margin-top: 60px;
+    padding: 24px 20px;
+    text-align: center;
+    color: var(--slate);
+    font-size: 14px;
+    border-top: 1px solid var(--fog);
+}
+
+@media (max-width: 760px) {
+    .hero { grid-template-columns: 1fr; }
+    .grid-tarjetas { grid-template-columns: 1fr; }
+    .grid-planes { grid-template-columns: 1fr; }
+    nav.principal { display: none; }
+}

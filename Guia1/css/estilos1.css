@@ -1,0 +1,34 @@
+/* V. Análisis de resultados - Ejercicio 1
+   Reglas equivalentes a los estilos que antes estaban embebidos
+   directamente en cada etiqueta del archivo estilos_embebidos.html */
+
+.pagina-embebidos {
+    background-color: lightblue;
+}
+
+.contenedor {
+    font-size: 20px;
+}
+
+.titulo {
+    text-decoration: underline;
+    color: white;
+}
+
+.parrafo-uno {
+    color: navy;
+    font-weight: bold;
+}
+
+.parrafo-dos {
+    text-transform: uppercase;
+    text-align: justify;
+}
+
+.parrafo-tres {
+    font-size: 12px;
+}
+
+.destacado {
+    font-style: italic;
+}

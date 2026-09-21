@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guías de Desarrollo Web I - Esteban Umanzor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0b0d12;
+            --surface: #141821;
+            --accent: #5b8def;
+            --text: #eef1f6;
+            --text-dim: #9aa4b2;
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', Arial, sans-serif;
+        }
+        header {
+            padding: 60px 20px 40px;
+            text-align: center;
+            border-bottom: 1px solid #1f2530;
+        }
+        header h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.2rem;
+            margin: 0 0 8px;
+        }
+        header p {
+            color: var(--text-dim);
+            margin: 0;
+        }
+        main {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 40px 20px 80px;
+        }
+        .guia {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 28px 30px;
+            margin-bottom: 30px;
+            border: 1px solid #1f2530;
+        }
+        .guia h2 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--accent);
+            margin-top: 0;
+        }
+        .guia ul {
+            list-style: none;
+            padding: 0;
+            margin: 16px 0 0;
+        }
+        .guia li {
+            padding: 8px 0;
+            border-bottom: 1px solid #1f2530;
+        }
+        .guia li:last-child { border-bottom: none; }
+        .guia a {
+            color: var(--text);
+            text-decoration: none;
+        }
+        .guia a:hover {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+        .etiqueta {
+            display: inline-block;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-dim);
+            border: 1px solid #2a3040;
+            border-radius: 20px;
+            padding: 2px 10px;
+            margin-left: 8px;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--text-dim);
+            font-size: 0.8rem;
+            border-top: 1px solid #1f2530;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Guías de Desarrollo Web I</h1>
+        <p>Esteban Umanzor · Ingeniería de Software y Negocios Digitales · ESEN · Ciclo 03-2026</p>
+    </header>
+
+    <main>
+        <section class="guia">
+            <h2><a href="Guia1/index.html">Guía 1 — Introducción y conceptos básicos de HTML y CSS</a></h2>
+            <ul>
+                <li><a href="Guia1/estilos_embebidos.html">Ejercicio 1 — Estilos embebidos</a></li>
+                <li><a href="Guia1/ejemplo2.html">Ejercicio 2 — Etiqueta &lt;style&gt;</a></li>
+                <li><a href="Guia1/paises.html">Ejercicio 3 — Países de Centroamérica (hoja externa)</a></li>
+                <li><a href="Guia1/programa-favorito.html">Ejercicio complementario — Mi serie favorita</a></li>
+                <li><a href="reto-ia/generico/index.html">Reto IA — Resultado con instrucción genérica</a><span class="etiqueta">elsalvador.com</span></li>
+                <li><a href="reto-ia/elaborado/index.html">Reto IA — Resultado con instrucción elaborada</a><span class="etiqueta">elsalvador.com</span></li>
+                <li><a href="Guia1/analisis-reto-ia.html">Reto IA — Diagnóstico, prompts y tabla de correspondencia</a></li>
+            </ul>
+        </section>
+
+        <section class="guia">
+            <h2><a href="Guia2/index.html">Guía 2 — Selectores CSS avanzados y modelo de caja</a></h2>
+            <ul>
+                <li><a href="Guia2/pelicula.html">Ejercicio 1 — Página de película (Altamar)</a></li>
+                <li><a href="Guia2/tablero.html">Ejercicio 2 — Tablero de damas</a></li>
+                <li><a href="reto-ia-3paginas/index.html">Reto IA — Sitio de 3 páginas (estilo Hashnode)</a><span class="etiqueta">Inicio</span></li>
+                <li><a href="reto-ia-3paginas/servicios.html">Reto IA — Página de Suscripciones</a><span class="etiqueta">nueva</span></li>
+                <li><a href="reto-ia-3paginas/contacto.html">Reto IA — Página de Contacto</a><span class="etiqueta">nueva</span></li>
+                <li><a href="reto-ia-3paginas/instruccion-ia.html">Reto IA — Instrucción utilizada y design.md</a></li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        Repositorio de guías — Desarrollo Web I — 2026
+    </footer>
+
+</body>
+</html>
