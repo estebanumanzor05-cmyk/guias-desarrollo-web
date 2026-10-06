@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noticias de El Salvador - Diario Digital</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&display=swap" rel="stylesheet">
+    <!-- FontAwesome for news icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --azul-institucional: #0f3d63;
+            --azul-oscuro: #0a2942;
+            --azul-claro: #1d5b8f;
+            --rojo-acento: #d1272f;
+            --rojo-hover: #b01e25;
+            --gris-fondo: #f4f6f8;
+            --gris-linea: #e2e8f0;
+            --gris-texto: #4a5568;
+            --gris-oscuro: #1a202c;
+            --blanco: #ffffff;
+            
+            --font-serif: 'Merriweather', Georgia, serif;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--gris-fondo);
+            color: var(--gris-oscuro);
+            line-height: 1.5;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        a:hover {
+            color: var(--rojo-acento);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+
+        /* LAYOUT PRINCIPAL CON CSS GRID */
+        .site-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: auto auto auto 1fr auto;
+            grid-template-areas: 
+                "topbar"
+                "header"
+                "navbar"
+                "main"
+                "footer";
+            min-height: 100vh;
+        }
+
+        .header-topbar { grid-area: topbar; }
+        .site-header { grid-area: header; }
+        .main-nav { grid-area: navbar; }
+        .main-content { grid-area: main; }
+        .site-footer { grid-area: footer; }
+
+        /* HEADER & TOPBAR (FLEXBOX PARA COMPONENTES AISLADOS) */
+        .header-topbar {
+            background-color: var(--azul-oscuro);
+            color: var(--blanco);
+            font-size: 0.8rem;
+            padding: 6px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .topbar-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .topbar-info {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .topbar-social {
+            display: flex;
+            gap: 12px;
+        }
+
+        .site-header {
+            background-color: var(--blanco);
+            padding: 20px 0;
+            border-bottom: 1px solid var(--gris-linea);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-brand {
+            font-family: var(--font-serif);
+            font-size: 2.4rem;
+            font-weight: 900;
+            color: var(--azul-institucional);
+            letter-spacing: -1px;
+            line-height: 1;
+        }
+
+        .logo-brand span {
+            color: var(--rojo-acento);
+        }
+
+        .header-banner {
+            width: 728px;
+            height: 90px;
+            background-color: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            color: #868e96;
+            border: 1px dashed #ced4da;
+            border-radius: 4px;
+        }
+
+        /* NAVEGACIÓN PRINCIPAL */
+        .main-nav {
+            background-color: var(--azul-institucional);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-list {
+            display: flex;
+            list-style: none;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .nav-item a {
+            display: block;
+            color: var(--blanco);
+            padding: 14px 16px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 3px solid transparent;
+        }
+
+        .nav-item a:hover, .nav-item.active a {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-bottom-color: var(--rojo-acento);
+            color: var(--blanco);
+        }
+
+        .nav-search {
+            display: flex;
+            align-items: center;
+        }
+
+        .search-btn {
+            background: none;
+            border: none;
+            color: var(--blanco);
+            font-size: 1.1rem;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        /* ESTRUCTURA DE CONTENIDO PRINCIPAL CON CSS GRID */
+        .main-content {
+            max-width: 1200px;
+            margin: 25px auto;
+            padding: 0 15px;
+            width: 100%;
+        }
+
+        /* GRID DE LA SECCIÓN HERO / NOTICIAS PRINCIPALES */
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            grid-template-rows: auto;
+            gap: 25px;
+            margin-bottom: 35px;
+        }
+
+        .main-news-block {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        /* NOTA PRINCIPAL DESTACADA */
+        .featured-card {
+            background-color: var(--blanco);
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            display: grid;
+            grid-template-columns: 1fr;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .featured-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+        }
+
+        .featured-image-wrapper {
+            position: relative;
+            height: 380px;
+            overflow: hidden;
+        }
+
+        .featured-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .featured-card:hover .featured-image-wrapper img {
+            transform: scale(1.03);
+        }
+
+        .category-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: var(--rojo-acento);
+            color: var(--blanco);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            border-radius: 3px;
+            letter-spacing: 0.5px;
+        }
+
+        .featured-content {
+            padding: 20px;
+        }
+
+        .featured-title {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--azul-institucional);
+            line-height: 1.25;
+            margin-bottom: 12px;
+        }
+
+        .featured-excerpt {
+            color: var(--gris-texto);
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+
+        .news-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.8rem;
+            color: #718096;
+        }
+
+        /* GRID DE NOTAS SECUNDARIAS */
+        .secondary-news-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .secondary-card {
+            background-color: var(--blanco);
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            display: grid;
+            grid-template-rows: 140px 1fr;
+        }
+
+        .secondary-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .secondary-content {
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .secondary-title {
+            font-family: var(--font-serif);
+            font-size: 0.95rem;
+            font-weight: 700;
+            line-height: 1.3;
+            color: var(--gris-oscuro);
+            margin-bottom: 8px;
+        }
+
+        /* SIDEBAR (CSS GRID INTERNO) */
+        .sidebar {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+            align-content: start;
+        }
+
+        .widget {
+            background-color: var(--blanco);
+            border-radius: 6px;
+            padding: 20px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            border-top: 3px solid var(--azul-institucional);
+        }
+
+        .widget-title {
+            font-family: var(--font-sans);
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--azul-institucional);
+            text-transform: uppercase;
+            border-bottom: 2px solid var(--gris-linea);
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .widget-title span {
+            border-bottom: 2px solid var(--rojo-acento);
+            margin-bottom: -10px;
+            padding-bottom: 8px;
+        }
+
+        /* WIDGET CLIMA */
+        .weather-widget-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            align-items: center;
+            background: linear-gradient(135deg, var(--azul-institucional), var(--azul-claro));
+            color: var(--blanco);
+            padding: 15px;
+            border-radius: 6px;
+        }
+
+        .weather-temp {
+            font-size: 2.2rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .weather-location {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        .weather-icon {
+            text-align: right;
+            font-size: 2.5rem;
+            color: #f6ad55;
+        }
+
+        /* LO MÁS LEÍDO (LISTA GRID) */
+        .top-read-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+
+        .top-read-item {
+            display: grid;
+            grid-template-columns: 35px 1fr;
+            gap: 12px;
+            align-items: start;
+            border-bottom: 1px dashed var(--gris-linea);
+            padding-bottom: 12px;
+        }
+
+        .top-read-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .top-read-number {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--rojo-acento);
+            line-height: 1;
+            text-align: center;
+        }
+
+        .top-read-title {
+            font-family: var(--font-serif);
+            font-size: 0.88rem;
+            font-weight: 700;
+            line-height: 1.35;
+        }
+
+        /* SECCIONES TEMÁTICAS (TURISMO, DINERO, VIDA, DEPORTES) */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--azul-institucional);
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--azul-institucional);
+        }
+
+        .section-link {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--rojo-acento);
+            text-transform: uppercase;
+        }
+
+        /* GRID SECCIÓN TURISMO Y DINERO (2 COLUMNAS DE CATEGORÍAS) */
+        .categories-dual-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .category-block-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .category-main-card {
+            grid-column: 1 / -1;
+            background-color: var(--blanco);
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            display: grid;
+            grid-template-columns: 120px 1fr;
+        }
+
+        .category-main-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .category-main-content {
+            padding: 12px;
+        }
+
+        .category-sub-card {
+            background-color: var(--blanco);
+            border-radius: 6px;
+            padding: 12px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+
+        .category-sub-title {
+            font-family: var(--font-serif);
+            font-size: 0.85rem;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        /* GRID SECCIÓN MULTIMEDIA / ENTRETENIMIENTO */
+        .entertainment-section {
+            background-color: var(--azul-oscuro);
+            color: var(--blanco);
+            padding: 35px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+        }
+
+        .entertainment-section .section-title {
+            color: var(--blanco);
+            border-bottom-color: rgba(255,255,255,0.2);
+        }
+
+        .entertainment-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .entertainment-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 6px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .entertainment-card img {
+            height: 150px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .entertainment-content {
+            padding: 15px;
+        }
+
+        .entertainment-title {
+            font-family: var(--font-serif);
+            font-size: 0.95rem;
+            color: var(--blanco);
+            line-height: 1.3;
+        }
+
+        /* FOOTER */
+        .site-footer {
+            background-color: var(--azul-oscuro);
+            color: var(--blanco);
+            padding-top: 40px;
+            border-top: 4px solid var(--rojo-acento);
+        }
+
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px 30px 15px;
+            display: grid;
+            grid-template-columns: 2fr repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .footer-brand p {
+            font-size: 0.85rem;
+            color: #a0aec0;
+            margin-top: 10px;
+        }
+
+        .footer-col h4 {
+            font-size: 1rem;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            color: var(--blanco);
+            border-bottom: 1fr solid var(--rojo-acento);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 8px;
+        }
+
+        .footer-links a {
+            color: #cbd5e0;
+            font-size: 0.85rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--blanco);
+        }
+
+        .footer-bottom {
+            background-color: rgba(0,0,0,0.2);
+            padding: 15px 0;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #a0aec0;
+        }
+
+        /* RESPONSIVE DESIGN CON MEDIA QUERIES (ADAPTACIÓN DE CSS GRID) */
+        @media (max-width: 992px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header-banner {
+                display: none;
+            }
+
+            .categories-dual-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .entertainment-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .secondary-news-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .category-block-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .entertainment-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .featured-title {
+                font-size: 1.4rem;
+            }
+
+            .featured-image-wrapper {
+                height: 240px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SITE CONTAINER (GRID PRINCIPAL) -->
+    <div class="site-container">
+
+        <!-- TOPBAR -->
+        <div class="header-topbar">
+            <div class="topbar-content">
+                <div class="topbar-info">
+                    <span><i class="far fa-calendar-alt"></i> Lunes, 5 de Octubre de 2026</span>
+                    <span><i class="fas fa-map-marker-alt"></i> San Salvador, El Salvador</span>
+                </div>
+                <div class="topbar-social">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- HEADER -->
+        <header class="site-header">
+            <div class="header-container">
+                <a href="#" class="logo-brand">elsalvador<span>.com</span></a>
+                <div class="header-banner">
+                    <p>Espacio Publicitario Disponible 728x90</p>
+                </div>
+            </div>
+        </header>
+
+        <!-- NAVBAR -->
+        <nav class="main-nav">
+            <div class="nav-container">
+                <ul class="nav-list">
+                    <li class="nav-item active"><a href="#">Inicio</a></li>
+                    <li class="nav-item"><a href="#">Noticias</a></li>
+                    <li class="nav-item"><a href="#">Turismo</a></li>
+                    <li class="nav-item"><a href="#">Dinero y Negocios</a></li>
+                    <li class="nav-item"><a href="#">Vida</a></li>
+                    <li class="nav-item"><a href="#">Entretenimiento</a></li>
+                    <li class="nav-item"><a href="#">Deportes</a></li>
+                </ul>
+                <div class="nav-search">
+                    <button class="search-btn"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- MAIN CONTENT (GRID DE CONTENIDO) -->
+        <main class="main-content">
+
+            <!-- ZONA HERO / NOTICIA DESTACADA Y NOTAS SECUNDARIAS (GRID 2 COLUMNAS) -->
+            <section class="hero-grid">
+                
+                <!-- BLOQUE NOTICIAS IZQUIERDA -->
+                <div class="main-news-block">
+                    
+                    <!-- NOTA PRINCIPAL DESTACADA -->
+                    <article class="featured-card">
+                        <div class="featured-image-wrapper">
+                            <span class="category-badge">Noticias</span>
+                            <img src="https://images.unsplash.com/photo-1578637387939-43c525550085?auto=format&fit=crop&w=1000&q=80" alt="Infraestructura El Salvador" onerror="this.src='https://placehold.co/800x450/0f3d63/ffffff?text=Noticia+Principal'">
+                        </div>
+                        <div class="featured-content">
+                            <h1 class="featured-title">Avanzan obras de modernización en el puerto de Acajutla para dinamizar comercio regional</h1>
+                            <p class="featured-excerpt">El proyecto busca duplicar la capacidad de carga y mejorar los tiempos de atención a buques mercantes en la costa salvadoreña, atrayendo mayor inversión internacional.</p>
+                            <div class="news-meta">
+                                <span><i class="far fa-user"></i> Redacción El Salvador</span>
+                                <span><i class="far fa-clock"></i> Hace 35 min</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- NOTAS SECUNDARIAS (GRID 3 COLUMNAS) -->
+                    <div class="secondary-news-grid">
+                        
+                        <article class="secondary-card">
+                            <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&w=400&q=80" alt="Economia" onerror="this.src='https://placehold.co/400x250/0f3d63/ffffff?text=Dinero'">
+                            <div class="secondary-content">
+                                <h3 class="secondary-title">Exportaciones de café salvadoreño registran alza del 14% este trimestre</h3>
+                                <div class="news-meta">
+                                    <span>Hace 2 horas</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="secondary-card">
+                            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=400&q=80" alt="Turismo El Tunco" onerror="this.src='https://placehold.co/400x250/0f3d63/ffffff?text=Turismo'">
+                            <div class="secondary-content">
+                                <h3 class="secondary-title">Surf City reporta ocupación hotelera récord durante el fin de semana</h3>
+                                <div class="news-meta">
+                                    <span>Hace 4 horas</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="secondary-card">
+                            <img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=400&q=80" alt="Deportes Estadio" onerror="this.src='https://placehold.co/400x250/0f3d63/ffffff?text=Deportes'">
+                            <div class="secondary-content">
+                                <h3 class="secondary-title">Selecta define su alineación titular para el encuentro decisivo de eliminatorias</h3>
+                                <div class="news-meta">
+                                    <span>Hace 5 horas</span>
+                                </div>
+                            </div>
+                        </article>
+
+                    </div>
+
+                </div>
+
+                <!-- SIDEBAR DERECHA -->
+                <aside class="sidebar">
+                    
+                    <!-- WIDGET CLIMA -->
+                    <div class="widget">
+                        <div class="widget-title">
+                            <span>Clima en El Salvador</span>
+                        </div>
+                        <div class="weather-widget-grid">
+                            <div>
+                                <div class="weather-temp">31°C</div>
+                                <div class="weather-location">San Salvador</div>
+                                <small>Soleado con brisa</small>
+                            </div>
+                            <div class="weather-icon">
+                                <i class="fas fa-sun"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- WIDGET LO MÁS LEÍDO -->
+                    <div class="widget">
+                        <div class="widget-title">
+                            <span>Lo más leído</span>
+                        </div>
+                        <div class="top-read-list">
+                            <div class="top-read-item">
+                                <span class="top-read-number">1</span>
+                                <a href="#" class="top-read-title">Nuevos horarios y rutas de transporte colectivo para el centro histórico</a>
+                            </div>
+                            <div class="top-read-item">
+                                <span class="top-read-number">2</span>
+                                <a href="#" class="top-read-title">Descubre la ruta gastronómica de la Ruta de las Flores para este fin de semana</a>
+                            </div>
+                            <div class="top-read-item">
+                                <span class="top-read-number">3</span>
+                                <a href="#" class="top-read-title">Precios de los combustibles muestran una reducción en El Salvador</a>
+                            </div>
+                            <div class="top-read-item">
+                                <span class="top-read-number">4</span>
+                                <a href="#" class="top-read-title">Festival cultural en Suchitoto reunirá a más de 50 artistas locales</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </aside>
+
+            </section>
+
+            <!-- SECCIÓN CATEGORÍAS: TURISMO Y DINERO -->
+            <div class="categories-dual-grid">
+                
+                <!-- BLOQUE TURISMO -->
+                <section>
+                    <div class="section-header">
+                        <h2 class="section-title">Turismo</h2>
+                        <a href="#" class="section-link">Ver todo <i class="fas fa-chevron-right"></i></a>
+                    </div>
+                    <div class="category-block-grid">
+                        <article class="category-main-card">
+                            <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=300&q=80" alt="Volcán de Izalco" onerror="this.src='https://placehold.co/300x300/0f3d63/ffffff?text=Turismo'">
+                            <div class="category-main-content">
+                                <h3 class="secondary-title">Caminata nocturna al Volcán de Izalco atrae a cientos de turistas internacionales</h3>
+                                <div class="news-meta">
+                                    <span>Turismo Ecológico</span>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="category-sub-card">
+                            <h4 class="category-sub-title">Los 5 pueblos vivos indispensables que debes visitar esta temporada</h4>
+                        </article>
+                        <article class="category-sub-card">
+                            <h4 class="category-sub-title">Aumenta la llegada de cruceros al Puerto de La Libertad</h4>
+                        </article>
+                    </div>
+                </section>
+
+                <!-- BLOQUE DINERO Y NEGOCIOS -->
+                <section>
+                    <div class="section-header">
+                        <h2 class="section-title">Dinero y Negocios</h2>
+                        <a href="#" class="section-link">Ver todo <i class="fas fa-chevron-right"></i></a>
+                    </div>
+                    <div class="category-block-grid">
+                        <article class="category-main-card">
+                            <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=300&q=80" alt="Finanzas" onerror="this.src='https://placehold.co/300x300/0f3d63/ffffff?text=Negocios'">
+                            <div class="category-main-content">
+                                <h3 class="secondary-title">Sector de tecnología lidera la atracción de capital emprendedor en el país</h3>
+                                <div class="news-meta">
+                                    <span>Emprendimiento</span>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="category-sub-card">
+                            <h4 class="category-sub-title">Banca nacional lanza nuevas líneas de crédito para microempresas</h4>
+                        </article>
+                        <article class="category-sub-card">
+                            <h4 class="category-sub-title">Proyecciones del PIB salvadoreño muestran estabilidad para el cierre de año</h4>
+                        </article>
+                    </div>
+                </section>
+
+            </div>
+
+            <!-- SECCIÓN ENTRETENIMIENTO Y VIDA -->
+            <section class="entertainment-section">
+                <div class="section-header">
+                    <h2 class="section-title">Entretenimiento & Vida</h2>
+                    <a href="#" class="section-link" style="color:#ffffff;">Ver sección <i class="fas fa-chevron-right"></i></a>
+                </div>
+                <div class="entertainment-grid">
+                    
+                    <article class="entertainment-card">
+                        <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=400&q=80" alt="Concierto" onerror="this.src='https://placehold.co/400x250/0a2942/ffffff?text=Música'">
+                        <div class="entertainment-content">
+                            <h3 class="entertainment-title">Anuncian cartel de artistas para el festival internacional de música en San Salvador</h3>
+                        </div>
+                    </article>
+
+                    <article class="entertainment-card">
+                        <img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=400&q=80" alt="Gastronomía" onerror="this.src='https://placehold.co/400x250/0a2942/ffffff?text=Vida'">
+                        <div class="entertainment-content">
+                            <h3 class="entertainment-title">La nueva cocina salvadoreña conquista paladares exigentes a nivel internacional</h3>
+                        </div>
+                    </article>
+
+                    <article class="entertainment-card">
+                        <img src="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?auto=format&fit=crop&w=400&q=80" alt="Arte" onerror="this.src='https://placehold.co/400x250/0a2942/ffffff?text=Arte'">
+                        <div class="entertainment-content">
+                            <h3 class="entertainment-title">Inauguran exposición retrospectiva de arte pictórico nacional en el MARTE</h3>
+                        </div>
+                    </article>
+
+                    <article class="entertainment-card">
+                        <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=400&q=80" alt="Salud y Bienestar" onerror="this.src='https://placehold.co/400x250/0a2942/ffffff?text=Bienestar'">
+                        <div class="entertainment-content">
+                            <h3 class="entertainment-title">Hábitos sencillos para mantener el bienestar físico durante la semana laboral</h3>
+                        </div>
+                    </article>
+
+                </div>
+            </section>
+
+        </main>
+
+        <!-- FOOTER -->
+        <footer class="site-footer">
+            <div class="footer-grid">
+                
+                <div class="footer-brand">
+                    <a href="#" class="logo-brand" style="color:#ffffff;">elsalvador<span style="color:var(--rojo-acento);">.com</span></a>
+                    <p>El portal digital líder en información actualizada sobre El Salvador, noticias de última hora, deportes, turismo, negocios y entretenimiento.</p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Secciones</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Noticias</a></li>
+                        <li><a href="#">Turismo</a></li>
+                        <li><a href="#">Dinero y Negocios</a></li>
+                        <li><a href="#">Vida</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Más contenido</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Entretenimiento</a></li>
+                        <li><a href="#">Deportes</a></li>
+                        <li><a href="#">Opinión</a></li>
+                        <li><a href="#">Fotogalerías</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Contacto</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Sobre nosotros</a></li>
+                        <li><a href="#">Términos de servicio</a></li>
+                        <li><a href="#">Política de privacidad</a></li>
+                        <li><a href="#">Anúnciate con nosotros</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 elsalvador.com - Todos los derechos reservados. Rediseño conceptual.</p>
+            </div>
+        </footer>
+
+    </div>
+
+</body>
+</html>

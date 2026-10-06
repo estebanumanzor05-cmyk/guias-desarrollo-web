@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reto IA (Guía 3) — Instrucción, código y correcciones</title>
+<style>
+    body { font-family: Arial, sans-serif; max-width: 900px; margin: 40px auto; padding: 0 20px; line-height: 1.6; color: #1c1c1c; }
+    h1 { font-size: 1.7rem; }
+    h2 { margin-top: 36px; border-bottom: 2px solid #0f3d63; padding-bottom: 6px; color: #0f3d63; }
+    .prompt, .codigo { background: #f4f5f7; border-left: 4px solid #0f3d63; padding: 16px 20px; margin: 14px 0; white-space: pre-wrap; font-family: monospace; font-size: 0.82rem; max-height: 420px; overflow-y: auto; }
+    table { width: 100%; border-collapse: collapse; margin-top: 14px; }
+    th, td { border: 1px solid #ddd; padding: 10px; text-align: left; vertical-align: top; }
+    th { background: #0f3d63; color: white; }
+    a { color: #0f3d63; }
+</style>
+</head>
+<body>
+
+<h1>Reto IA — Guía 3: instrucción, código generado y correcciones</h1>
+<p><strong>Herramienta de IA utilizada:</strong> Gemini (Google) — distinta a ChatGPT (Guía 1) y Claude (Guía 2).</p>
+
+<h2>1. Instrucción enviada a la herramienta</h2>
+<div class="prompt">Necesito que construyas la página de inicio de un portal de noticias salvadoreño (basado conceptualmente en elsalvador.com), como una nueva versión de un sitio que ya existe.
+
+Temática y finalidad: es la página principal de un periódico digital salvadoreño, con secciones de noticias generales, deportes, entretenimiento, turismo, dinero y negocios, y vida.
+
+Contenido que debe conservarse: una nota principal destacada, dos o tres notas secundarias, y el menú de navegación con las categorías: Inicio, Noticias, Turismo, Dinero y negocios, Vida, Entretenimiento, Deportes.
+
+Identidad visual que debe mantenerse: azul institucional #0f3d63, rojo de acento #d1272f, tipografía serif (Merriweather) para los titulares, y tipografía sans-serif (Inter) para el resto del texto.
+
+Requisito obligatorio: la distribución principal de la página (la que organiza la nota principal, las notas secundarias y el resto de la estructura de la página) debe construirse usando CSS Grid (display: grid), no Flexbox ni floats. Puedes usar Flexbox únicamente dentro de componentes aislados, como el menú de navegación o los botones, pero no como el sistema de distribución principal.
+
+Formato de entrega: genera el código HTML y el código CSS por separado, en dos bloques distintos (no mezclados en un solo archivo con &lt;style&gt; interno).</div>
+
+<h2>2. Revisión del resultado</h2>
+<p>Gemini conservó la identidad visual pedida (azul #0f3d63, rojo #d1272f, Merriweather/Inter) y sí usó CSS Grid como sistema de distribución principal (<code>.site-container</code> con <code>grid-template-areas</code>, y <code>.hero-grid</code> para la nota principal + sidebar). Sin embargo, no entregó el HTML y el CSS en dos bloques separados como se pidió explícitamente: generó un solo archivo con el CSS dentro de una etiqueta <code>&lt;style&gt;</code> interna.</p>
+<p>Al revisar el código también se encontró un error real: en la regla <code>.footer-col h4</code> aparecía la declaración <code>border-bottom: 1fr solid var(--rojo-acento);</code> — <code>1fr</code> es una unidad de CSS Grid (fracción del espacio disponible), no una unidad válida para el ancho de un borde, por lo que el navegador ignora esa línea por completo y el borde nunca se dibuja.</p>
+
+<h2>3. Cambios realizados sobre el resultado original</h2>
+<ul>
+    <li><strong>Separación de archivos:</strong> se extrajo todo el contenido de la etiqueta <code>&lt;style&gt;</code> a un archivo independiente <code>css/style.css</code>, y el HTML quedó en <code>index.html</code> enlazándolo con <code>&lt;link rel="stylesheet" href="css/style.css"&gt;</code>, cumpliendo el requisito de generación separada.</li>
+    <li><strong>Corrección del borde del footer:</strong> se cambió <code>border-bottom: 1fr solid var(--rojo-acento);</code> por <code>border-bottom: 1px solid var(--rojo-acento);</code> en <code>.footer-col h4</code>, para que el borde inferior sí se muestre.</li>
+</ul>
+
+<h2>4. Contenedor Grid y Grid items</h2>
+<table>
+    <thead>
+        <tr><th>Contenedor Grid</th><th>Elementos hijos (Grid items)</th></tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>.site-container</code> (contenedor principal de toda la página)</td>
+            <td><code>.header-topbar</code>, <code>.site-header</code>, <code>.main-nav</code>, <code>.main-content</code>, <code>.site-footer</code> — cada uno ubicado mediante <code>grid-area</code> según la plantilla <code>grid-template-areas</code> de 5 filas (topbar, header, navbar, main, footer).</td>
+        </tr>
+        <tr>
+            <td><code>.hero-grid</code> (zona de noticia principal + sidebar)</td>
+            <td><code>.main-news-block</code> (columna de 2fr) y <code>.sidebar</code> (columna de 1fr).</td>
+        </tr>
+        <tr>
+            <td><code>.secondary-news-grid</code> (notas secundarias)</td>
+            <td>las tres <code>.secondary-card</code>, repartidas en 3 columnas iguales (<code>repeat(3, 1fr)</code>).</td>
+        </tr>
+        <tr>
+            <td><code>.entertainment-grid</code> (sección Entretenimiento &amp; Vida)</td>
+            <td>las cuatro <code>.entertainment-card</code>, en 4 columnas iguales.</td>
+        </tr>
+        <tr>
+            <td><code>.footer-grid</code> (pie de página)</td>
+            <td><code>.footer-brand</code> y los tres <code>.footer-col</code>, en columnas <code>2fr 1fr 1fr 1fr</code>.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>5. Propiedades de CSS Grid presentes en el código</h2>
+<ul>
+    <li><strong><code>grid-template-columns</code>:</strong> define el número y el ancho de las columnas. Por ejemplo, en <code>.hero-grid</code> se usa <code>2fr 1fr</code> para que la columna de noticias ocupe el doble de espacio que la columna del sidebar.</li>
+    <li><strong><code>grid-template-rows</code> / <code>grid-template-areas</code>:</strong> en <code>.site-container</code> se nombran las filas (topbar, header, navbar, main, footer) y cada sección se asigna a su nombre mediante <code>grid-area</code>, en lugar de depender del orden en el HTML.</li>
+    <li><strong><code>gap</code>:</strong> controla la separación entre columnas y filas sin usar márgenes manuales (por ejemplo, <code>gap: 25px</code> en <code>.hero-grid</code> y <code>gap: 15px</code> en <code>.secondary-news-grid</code>).</li>
+    <li><strong><code>grid-column: 1 / -1</code>:</strong> usado en <code>.category-main-card</code> para que esa tarjeta ocupe todo el ancho disponible dentro de su contenedor de 2 columnas, en lugar de quedar en una sola celda.</li>
+    <li><strong>Media queries sobre Grid:</strong> en pantallas angostas se redefine <code>grid-template-columns</code> (por ejemplo, <code>.hero-grid</code> pasa de 2 columnas a <code>1fr</code>), adaptando la distribución sin tocar el HTML.</li>
+</ul>
+
+<h2>6. Modificación en vivo (para el video)</h2>
+<p>Durante el video se debe modificar al menos una propiedad de Grid en las DevTools del navegador. Propuesta: en <code>.secondary-news-grid</code>, cambiar <code>grid-template-columns: repeat(3, 1fr)</code> por <code>repeat(2, 1fr)</code>.</p>
+<p><strong>Cambio esperado:</strong> las tres notas secundarias, que se mostraban en una sola fila de 3 columnas iguales, pasarán a acomodarse en 2 columnas — dos tarjetas en la primera fila y la tercera sola en la segunda fila — porque ahora solo hay 2 pistas de columna disponibles para repartir los 3 elementos.</p>
+
+<h2>7. Publicación</h2>
+<p>La página está publicada en GitHub Pages, enlazada desde la página principal del repositorio (<a href="../index.html">index.html</a>).</p>
+
+</body>
+</html>
